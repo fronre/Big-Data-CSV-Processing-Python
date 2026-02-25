@@ -1,0 +1,4 @@
+Method,Execution Time (sec),Original Size (MB),Compressed Size (MB)
+Pandas Chunks,41.51,5276.13,2968.57
+Dask,25.44,5276.13,2968.57
+Compression,356.27,5276.13,2968.57

@@ -1,9 +1,10 @@
 import pandas as pd
 import gzip
-from utils.timer import measure_time
+from utils.timer import measure_performance
 
-@measure_time
+@measure_performance
 def compress_file(input_path, output_path, chunk_size=100000):
+    
     with gzip.open(output_path, 'wt', newline='') as f_out:
         for i, chunk in enumerate(pd.read_csv(input_path, chunksize=chunk_size)):
             chunk.to_csv(
@@ -11,3 +12,5 @@ def compress_file(input_path, output_path, chunk_size=100000):
                 header=(i == 0),
                 index=False
             )
+
+    return output_path

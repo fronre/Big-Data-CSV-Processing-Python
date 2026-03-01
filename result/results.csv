@@ -1,4 +1,4 @@
-Method,Execution Time (sec),Original Size (MB),Compressed Size (MB)
-Pandas Chunks,41.84,5276.13,2966.17
-Dask,29.02,5276.13,2966.17
-Compression,307.66,5276.13,2966.17
+Method,Execution Time (sec),Peak Memory (MB),Original Size (MB),Compressed Size (MB)
+Pandas Chunks,52.71,185.77,5276.13,2966.17
+Dask,38.3,355.7,5276.13,2966.17
+Compression,397.84,1536.74,5276.13,2966.17

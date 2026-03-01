@@ -14,6 +14,7 @@ def compress_file(input_path, output_path, chunk_size=100000):
         for i, chunk in enumerate(pd.read_csv(input_path, chunksize=chunk_size)):
 
             chunk.to_csv(
+
                 f_out,
                 header=(i == 0),
                 index=False

@@ -1,154 +1,202 @@
-# 🚀 High-Performance CSV Processing (5GB+)
-
-![Python](https://img.shields.io/badge/Python-3.x-blue)
-![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-orange)
-![Dask](https://img.shields.io/badge/Dask-Parallel%20Computing-green)
-![Status](https://img.shields.io/badge/Project-Academic-blueviolet)
-
----
+# 🚀 High-Performance Large CSV Processing in Python
 
 ## 📌 Project Overview
 
-This project demonstrates efficient techniques for processing very large CSV files (~5GB) in Python without causing memory overflow.
+This project demonstrates efficient techniques for processing very large
+CSV files (\~5GB) in Python without causing memory overflow.
 
-The experiment compares different Big Data approaches in terms of:
+The experiment compares different approaches in terms of:
 
-- ⏱ Execution time  
-- 💾 Storage efficiency  
-- 🧠 Memory management  
+-   ⏱ Execution Time
+-   💾 Storage Efficiency
+-   🧠 Memory Usage
 
-### Dataset Used
+------------------------------------------------------------------------
 
-- File name: `ACI-IoT-2023-Payload.csv`
-- File size: **5276.13 MB (~5.2 GB)**
+# 📂 Dataset
 
-> ⚠ Dataset not included in this repository due to its large size.
+Dataset used:
 
----
+`ACI-IoT-2023-Payload.csv`
 
-## 🏗 Project Structure
+Dataset size:
 
-```
-High-Performance-CSV-Processing/
-│
-├── services/
-│   ├── pandas_chunks.py
-│   ├── dask_reader.py
-│   └── compressor.py
-│
-├── utils/
-│   └── timer.py
-│
-├── main.py
-├── requirements.txt
-└── README.md
-```
+`5276.13 MB (~5.2 GB)`
 
----
+⚠ Dataset not included in the repository due to its large size.
 
-## ⚙️ Technologies Used
+------------------------------------------------------------------------
 
-- Python 3.x  
-- Pandas  
-- Dask  
-- Matplotlib  
-- gzip  
+# 🏗 Project Structure
 
----
+    Big-Data-CSV-Processing-Python
+    │
+    ├── data
+    │   ├── ACI-IoT-2023-Payload.csv
+    │   ├── compressed.csv
+    │   └── compressed.csv.gz
+    │
+    ├── result
+    │   ├── results.csv
+    │   ├── report.txt
+    │   ├── time_comparison.png
+    │   └── memory_comparison.png
+    │
+    ├── services
+    │   ├── pandas_chunks.py
+    │   ├── dask_reader.py
+    │   └── compressor.py
+    │
+    ├── utils
+    │   └── timer.py
+    │
+    ├── main.py
+    ├── requirements.txt
+    └── README.md
 
-## 🔬 Methods Implemented
+------------------------------------------------------------------------
 
-### 1️⃣ Pandas Chunking
+# ⚙️ Technologies Used
 
-```python
+-   Python
+-   Pandas
+-   Dask
+-   Matplotlib
+-   gzip
+
+------------------------------------------------------------------------
+
+# 🔬 Methods Implemented
+
+## 1️⃣ Pandas Chunk Processing
+
+``` python
 pd.read_csv(file, chunksize=100000)
 ```
 
-✔ Memory efficient  
-✔ Stable  
-❌ Sequential processing  
+✔ Memory efficient\
+✔ Works on machines with limited RAM\
+❌ Sequential processing
 
-**Execution Time:** `40.63 seconds`
+Execution Time: **49.23 sec**\
+Peak Memory: **182 MB**
 
----
+------------------------------------------------------------------------
 
-### 2️⃣ Dask (Parallel Processing)
+## 2️⃣ Dask (Parallel Processing)
 
-```python
+``` python
 dd.read_csv(file)
 ```
 
-✔ Fastest method  
-✔ Multi-core processing  
-✔ Designed for large datasets  
+✔ Parallel processing\
+✔ Multi-core utilization\
+✔ Designed for large datasets
 
-**Execution Time:** `25.31 seconds`
+Execution Time: **35.44 sec**\
+Peak Memory: **300 MB**
 
----
+------------------------------------------------------------------------
 
-### 3️⃣ File Compression (gzip)
+## 3️⃣ File Compression (gzip)
 
-- Original Size: **5276.13 MB**
-- Compressed Size: **2968.57 MB**
-- Storage Reduction: **~44%**
+Original File Size: **5276.13 MB**\
+Compressed File Size: **2966.17 MB**
 
-✔ Reduces disk usage  
-❌ High processing time  
+Storage Reduction: **≈44%**
 
-**Execution Time:** `295.48 seconds`
+Execution Time: **417.64 sec**\
+Peak Memory: **5694 MB**
 
----
+------------------------------------------------------------------------
 
-## 📊 Experimental Results
+# 📊 Experimental Results
 
-| Method          | Execution Time (sec) | File Size (MB) |
-|----------------|----------------------|----------------|
-| Pandas Chunks | 40.63               | 5276.13       |
-| Dask          | 25.31               | 5276.13       |
-| Compression   | 295.48              | 2968.57       |
+  --------------------------------------------------------------------------
+  Method         Execution Time Peak Memory    Original Size  Compressed
+                 (sec)          (MB)           (MB)           Size (MB)
+  -------------- -------------- -------------- -------------- --------------
+  Pandas Chunks  49.23          182.71         5276.13        2966.17
 
----
+  Dask           35.44          300.05         5276.13        2966.17
 
-## 📈 Performance Analysis
+  Compression    417.64         5694.81        5276.13        2966.17
+  --------------------------------------------------------------------------
 
-- 🥇 **Fastest Approach:** Dask  
-- 💾 **Best Storage Optimization:** Compression (~44% reduction)  
-- ⚖ **Balanced Approach:** Pandas Chunking  
+------------------------------------------------------------------------
 
-Dask outperformed Pandas due to parallel computation.  
-Compression significantly reduced storage size but required much more processing time.
+# 📈 Execution Time Comparison
 
----
+![Execution Time](result/time_comparison.png)
 
-## 🧠 Key Takeaways
+------------------------------------------------------------------------
 
-- Large CSV files cannot be safely loaded entirely into memory.
-- Chunking improves memory control.
-- Parallel processing significantly improves execution speed.
-- Compression trades CPU time for storage efficiency.
+# 📊 Memory Usage Comparison
 
----
+![Memory Usage](result/memory_comparison.png)
 
-## ▶️ How to Run
+------------------------------------------------------------------------
 
-Install dependencies:
+# 🧠 Performance Analysis
 
-```bash
+🏆 **Fastest Method:** Dask
+
+Dask is faster because it uses **parallel processing** and distributes
+computation across CPU cores.
+
+⚖ **Balanced Method:** Pandas Chunking
+
+Provides a good balance between **memory usage and execution speed**.
+
+💾 **Best Storage Optimization:** Compression
+
+Reduces disk usage by about **44%** but requires much more CPU time and
+memory.
+
+------------------------------------------------------------------------
+
+# 🧠 Key Takeaways
+
+-   Large CSV files should not be loaded entirely into memory.
+-   Chunking improves memory control.
+-   Parallel processing (Dask) significantly improves execution speed.
+-   Compression trades CPU time for storage efficiency.
+
+------------------------------------------------------------------------
+
+# ▶️ How to Run
+
+## Install dependencies
+
+``` bash
 pip install -r requirements.txt
 ```
 
-Run the project:
+## Run the project
 
-```bash
+``` bash
 python main.py
 ```
 
----
+The script will:
 
-## 🎯 Conclusion
+-   Process the dataset using Pandas chunks
+-   Process the dataset using Dask
+-   Compress the dataset
+-   Generate performance graphs
 
-This project demonstrates practical and scalable techniques for handling large-scale datasets efficiently in Python.
+------------------------------------------------------------------------
 
-- Use **Dask** for performance-critical workloads.
-- Use **Compression** for storage optimization.
-- Use **Pandas chunking** for controlled memory usage.
+# 🎯 Conclusion
+
+This project demonstrates practical techniques for handling
+**multi‑gigabyte datasets in Python**.
+
+  Goal               Recommended Method
+  ------------------ --------------------
+  Fast processing    Dask
+  Low memory usage   Pandas Chunks
+  Reduce storage     Compression
+
+These techniques are commonly used in **Data Engineering and Big Data
+workflows**.
